@@ -45,32 +45,30 @@ const CommunityReports = () => {
   const totalPages = Math.ceil(reports.length / reportsPerPage);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'flex-start', height: '100vh', margin: 20 }}>
-      <div>
-        <div>
-          <h1>Community Reports</h1>
-          <div id='pagination' style={{ marginBottom: '20px', float: 'right' }}>
-            <Stack direction="row" spacing={2}>
-              <Button
-                variant={currentPage > 1 ? 'outlined' : 'disabled'}
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-              >
-                {'<'}
-              </Button>
-              <Button variant="contained">{currentPage}</Button>
-              <Button
-                variant={currentPage < totalPages ? 'outlined' : 'disabled'}
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
-              >
-                {'>'}
-              </Button>
-            </Stack>
-          </div>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', height: '100vh', margin: 20 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
+        <h1>Community Reports</h1>
+        <div id='pagination' style={{ marginBottom: '20px' }}>
+          <Stack direction="row" spacing={2}>
+            <Button
+              variant={currentPage > 1 ? 'outlined' : 'disabled'}
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              {'<'}
+            </Button>
+            <Button variant="contained">{currentPage}</Button>
+            <Button
+              variant={currentPage < totalPages ? 'outlined' : 'disabled'}
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              {'>'}
+            </Button>
+          </Stack>
         </div>
-        <CardList list={currentReports} />
       </div>
+      <CardList list={currentReports} />
     </div>
   );
 };

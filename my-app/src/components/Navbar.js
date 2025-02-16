@@ -13,7 +13,7 @@ function Navbar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+        <img src="/Magnifying_glass_icon.svg" alt="Robot Icon" style={{ width: '25px', height: '25px', marginRight: '10px', filter: 'invert(1)' }} />
           <div>
             <Typography
                 variant="h6"
