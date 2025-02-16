@@ -55,11 +55,11 @@ async function sendToApi(content) {
 
         // Display results and remove spinner
         const label = data.percentage > 75 ? "Clickbait" :
-                      data.percentage >= 50 ? "Mixed" :
+                      data.percentage >= 25 ? "Mixed" :
                       "Legit";
 
         const labelColor = data.percentage > 75 ? "red" :
-                           data.percentage >= 50 ? "orange" :
+                           data.percentage >= 25 ? "orange" :
                            "green";
 
         resultDiv.innerHTML = `

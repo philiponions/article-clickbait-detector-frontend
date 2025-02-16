@@ -96,7 +96,7 @@ const CardList = (props) => {
           title={item.title}
           website={item.website}
           thumbnail={item.thumbnail}
-          percentage={item.meter}        
+          percentage={item.percentage}        
           onClick={() => handleCardClick(item)}  
         />
       </Grid>
