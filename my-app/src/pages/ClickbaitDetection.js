@@ -32,7 +32,7 @@ const ClickbaitDetection = () => {
           <ul>
             <li>{reportData.title}</li>
           </ul>
-          <h3>Clickbait Meter</h3>
+          <h3>Clickbait Score</h3>
           <div
             style={{
               width: '100%',
@@ -44,9 +44,9 @@ const ClickbaitDetection = () => {
           >
             <div
               style={{
-                width: CLICKBAIT_THRESHOLD, // Placeholder value
+                width: `${reportData.percentage}%`,
                 height: '100%',
-                backgroundColor: 'red',
+                backgroundColor: reportData.percentage > 50 ? 'red' : 'green',
               }}
             ></div>
           </div>

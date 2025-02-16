@@ -36,7 +36,7 @@ function Navbar() {
           <div>
           <Typography
                 component="a"
-                href="community"
+                href="/community"
                 sx={{
                     textDecoration: 'none',
                     color: 'inherit',
@@ -47,7 +47,7 @@ function Navbar() {
             <Typography
                 style={{marginLeft: 10}}
                 component="a"
-                href="about"
+                href="/about"
                 sx={{
                     textDecoration: 'none',
                     color: 'inherit',

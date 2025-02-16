@@ -1,5 +1,6 @@
+import { useLocation, useParams } from 'react-router-dom';
+import { Chip } from '@mui/material';
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { ThumbUp, ThumbDown } from '@mui/icons-material';
 import { Button, Typography, Stack } from '@mui/material';
 
@@ -25,8 +26,23 @@ const ReportDetails = () => {
           {report.url}
         </a>
       </Typography>
-      <Typography><strong>Verdict:</strong> {report.verdict}</Typography>
-      <Typography><strong>Meter:</strong> {report.meter}%</Typography>
+      <Typography style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}>
+        <p style={{ margin: 0 }}><strong>Verdict:</strong></p>
+        <Chip 
+          style={{ marginLeft: 10 }}
+          label={
+            report.percentage > 75 ? "Clickbait" : 
+            report.percentage >= 25 ? "Mixed" : 
+            "Legit"
+          } 
+          color={
+            report.percentage > 75 ? "error" : 
+            report.percentage >= 25 ? "warning" : 
+            "success"
+          }
+        />
+      </Typography>
+      <Typography><strong>Meter:</strong> {report.percentage}%</Typography>
       <Typography><strong>Summary:</strong> {report.summary}</Typography>
       <Typography><strong>Explanation:</strong> {report.explanation}</Typography>
 
