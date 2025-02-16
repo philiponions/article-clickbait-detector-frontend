@@ -1,7 +1,6 @@
 import { useLocation, useParams } from 'react-router-dom';
 import { Chip } from '@mui/material';
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { ThumbUp, ThumbDown } from '@mui/icons-material';
 import { Button, Typography, Stack } from '@mui/material';
 
@@ -43,7 +42,7 @@ const ReportDetails = () => {
           }
         />
       </Typography>
-      <Typography><strong>Meter:</strong> {report.meter}%</Typography>
+      <Typography><strong>Meter:</strong> {report.percentage}%</Typography>
       <Typography><strong>Summary:</strong> {report.summary}</Typography>
       <Typography><strong>Explanation:</strong> {report.explanation}</Typography>
 
