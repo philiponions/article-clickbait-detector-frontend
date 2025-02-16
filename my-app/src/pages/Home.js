@@ -20,7 +20,11 @@ const Home = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', height: '100vh' }}>
-      <h1>Article Clickbait Detector</h1>
+      <div style={{ display: 'flex', alignItems: 'center' }}></div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <img src="/Magnifying_glass_icon.svg" alt="Robot Icon" style={{ width: '25px', height: '25px', marginRight: '10px' }} />
+        <h1>Article Clickbait Detector</h1>
+      </div>
       <p>Check if an article is clickbait or legit</p>
       <form onSubmit={handleSubmit}>
         <TextField

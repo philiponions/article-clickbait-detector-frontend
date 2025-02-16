@@ -9,16 +9,18 @@ import ReportDetails from './pages/ReportDetails'; // Import the new ReportDetai
 
 function App() {
   return (
-    <BrowserRouter>
-    <Navbar/>
-      <Routes >
-        <Route path="/" element={<Home />} />
-        <Route path="/clickbait-detection" element={<ClickbaitDetection />} />
-        <Route path="/community" element={<CommunityReports/>} />
-        <Route path="/about" element={<About/>} />
-        <Route path="/report/:title" element={<ReportDetails />} /> 
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/clickbait-detection" element={<ClickbaitDetection />} />
+          <Route path="/community" element={<CommunityReports />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/report/:title" element={<ReportDetails />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

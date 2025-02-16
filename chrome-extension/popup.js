@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
-
 async function sendToApi(content) {
     const apiUrl = "http://localhost:8000/generate-report"; // Your API endpoint
     const resultDiv = document.getElementById("result");
@@ -67,28 +66,40 @@ async function sendToApi(content) {
             <p><strong>Clickbait Score:</strong> ${data.percentage}%</p>
             <p><strong>Label:</strong> <span style="color: ${labelColor}; font-weight: bold;">${label}</span></p>
             <p><strong>Explanation:</strong> ${data.explanation}</p>
-            <p><strong>Summary:</strong> ${data.tldr}</p>
-            <button id="publish-report">Publish Report</button>
+            <p><strong>TLDR:</strong> ${data.tldr}</p>
+            ${data["existing"] ? '<button id="view-report">View Existing Report</button>' : '<button id="publish-report">Publish Report</button>'}
         `;
 
-        document.getElementById("publish-report").addEventListener("click", async () => {
-            try {
-                const publishResponse = await fetch("http://localhost:8000/add-report", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(data)
-                });
+        if (data["existing"]) {
+            document.getElementById("view-report").addEventListener("click", () => {
+                window.open("http://localhost:8000/view-report", "_blank");
+            });
+        } else {
+            document.getElementById("publish-report").addEventListener("click", async () => {
+                try {
+                    const publishResponse = await fetch("http://localhost:8000/add-report", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(data)
+                    });
 
-                if (publishResponse.ok) {
-                    alert("Report published successfully!");
-                } else {
-                    alert("Failed to publish report.");
+                    if (publishResponse.ok) {
+                        alert("Report published successfully!");
+                        const publishButton = document.getElementById("publish-report");
+                        publishButton.id = "view-report";
+                        publishButton.textContent = "View Report";
+                        publishButton.addEventListener("click", () => {
+                            window.open("http://localhost:8000/view-report", "_blank");
+                        });
+                    } else {
+                        alert("Failed to publish report.");
+                    }
+                } catch (error) {
+                    alert("Error publishing report.");
+                    console.error("Error:", error);
                 }
-            } catch (error) {
-                alert("Error publishing report.");
-                console.error("Error:", error);
-            }
-        });
+            });
+        }
     } catch (error) {
         resultDiv.innerHTML = "<p style='color: red;'>Error analyzing article.</p>";
         console.error("Error:", error);

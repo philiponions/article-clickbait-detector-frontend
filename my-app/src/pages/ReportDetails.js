@@ -43,8 +43,8 @@ const ReportDetails = () => {
         />
       </Typography>
       <Typography><strong>Meter:</strong> {report.percentage}%</Typography>
-      <Typography><strong>Summary:</strong> {report.summary}</Typography>
       <Typography><strong>Explanation:</strong> {report.explanation}</Typography>
+      <Typography><strong>TLDR:</strong> {report.tldr}</Typography>
 
       {/* Like / Dislike Buttons */}
       <Stack direction="row" spacing={3} alignItems="center" sx={{ marginTop: 2 }}>
