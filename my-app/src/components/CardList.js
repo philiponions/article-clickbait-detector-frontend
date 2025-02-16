@@ -34,7 +34,7 @@ const CardComponent = ({ title, website, thumbnail, percentage, onClick }) => (
     sx={{
       minWidth: 350, // Increased minimum width
       width: '100%', // Ensures the card takes up full available width
-      marginRight: 100, // Adds some space below each card
+      marginRight: '100px', // Adds some space below each card
       transition: 'transform 0.2s, box-shadow 0.2s',
       '&:hover': {
         transform: 'scale(1.05)',
