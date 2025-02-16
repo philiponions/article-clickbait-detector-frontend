@@ -40,13 +40,30 @@ const ReportDetails = () => {
         >
             <Typography variant="h4">{report.title}</Typography>
             <img src={report.thumbnail} alt={report.title} style={{ width: '30%', height: 'auto', marginBottom: 10 }} />
-            <Typography><strong>Website:</strong> {report.website}</Typography>
             <Typography>
-                <strong>URL:</strong>{' '}
                 <a href={report.url} target="_blank" rel="noopener noreferrer">
-                    {report.url}
+                    Article Link
                 </a>
             </Typography>
+
+            <h3>Clickbait Score</h3>
+            <div
+                style={{
+                    width: '100%',
+                    height: '20px',
+                    backgroundColor: '#ccc',
+                    borderRadius: '5px',
+                    overflow: 'hidden',
+                }}
+            >
+                <div
+                    style={{
+                        width: `${report.percentage}%`,
+                        height: '100%',
+                        backgroundColor: report.percentage > 50 ? 'red' : 'green',
+                    }}
+                ></div>
+            </div>
             <Typography style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}>
                 <p style={{ margin: 0 }}><strong>Verdict:</strong></p>
                 <Chip
@@ -63,10 +80,10 @@ const ReportDetails = () => {
                     }
                 />
             </Typography>
-            <Typography><strong>Meter:</strong> {report.percentage}%</Typography>
-            <Typography><strong>Summary:</strong> {report.summary}</Typography>
-            <Typography><strong>Explanation:</strong> {report.explanation}</Typography>
-
+            <h2>Summary</h2>
+            <p>{report.summary}</p>
+            <h3>Explanation</h3>
+            <p>{report.explanation}</p>
             {/* Like / Dislike Buttons */}
             <Stack direction="row" spacing={3} alignItems="center" sx={{ marginTop: 2 }}>
                 {/* Like */}
