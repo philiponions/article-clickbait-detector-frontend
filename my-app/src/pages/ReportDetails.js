@@ -35,7 +35,6 @@ const ReportDetails = () => {
             padding: '10px',
             maxWidth: '1200px', // Set max width for the container
             margin: '0 auto', // Center the container horizontally
-
             borderRadius: '8px', // Optional rounded corners for aesthetics
         }}
         >

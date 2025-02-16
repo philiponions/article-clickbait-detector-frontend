@@ -9,7 +9,6 @@ import ReportDetails from './pages/ReportDetails'; // Import the new ReportDetai
 
 function App() {
   return (
-<<<<<<< HEAD
     <BrowserRouter>
     <Navbar/>
       <Routes >
@@ -20,20 +19,6 @@ function App() {
         <Route path="/reports/:id" element={<ReportDetails />} /> 
       </Routes>
     </BrowserRouter>
-=======
-    <div>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/clickbait-detection" element={<ClickbaitDetection />} />
-          <Route path="/community" element={<CommunityReports />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/report/:title" element={<ReportDetails />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
->>>>>>> 99a198ca3c43a5623d92e4ded8dbbecb0b6890ac
   );
 }
 
