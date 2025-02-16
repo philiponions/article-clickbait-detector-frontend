@@ -85,7 +85,8 @@ const CardList = (props) => {
   const navigate = useNavigate();
 
   const handleCardClick = (item) => {
-    navigate(`/report/${encodeURIComponent(item.title)}`, { state: { report: item } });
+    console.log("passing id:", item._id);
+    navigate(`/reports/${item._id}`);
   };
 
   return (
