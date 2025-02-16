@@ -16,7 +16,7 @@ function App() {
         <Route path="/clickbait-detection" element={<ClickbaitDetection />} />
         <Route path="/community" element={<CommunityReports/>} />
         <Route path="/about" element={<About/>} />
-        <Route path="/report/:title" element={<ReportDetails />} /> 
+        <Route path="/reports/:id" element={<ReportDetails />} /> 
       </Routes>
     </BrowserRouter>
   );
