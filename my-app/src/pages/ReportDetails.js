@@ -9,7 +9,7 @@ const ReportDetails = () => {
     const [report, setReport] = useState(null);
     const [likes, setLikes] = useState(0);
     const [dislikes, setDislikes] = useState(0);
-    
+
     useEffect(() => {
         console.log("Fetching report with id:", id);
         // Fetch the report details based on the id
@@ -31,7 +31,14 @@ const ReportDetails = () => {
     }
 
     return (
-        <div style={{ padding: 20 }}>
+        <div style={{
+            padding: '10px',
+            maxWidth: '1200px', // Set max width for the container
+            margin: '0 auto', // Center the container horizontally
+
+            borderRadius: '8px', // Optional rounded corners for aesthetics
+        }}
+        >
             <Typography variant="h4">{report.title}</Typography>
             <img src={report.thumbnail} alt={report.title} style={{ width: '30%', height: 'auto', marginBottom: 10 }} />
             <Typography><strong>Website:</strong> {report.website}</Typography>
