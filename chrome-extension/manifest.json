@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "Clickbait Detector",
+    "version": "1.0.0",
+    "description": "Check if an article is clickbait or legit",
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "Clickbait Detector"
+    },
+    "permissions": [
+        "scripting",
+        "activeTab",
+        "tabs"
+    ],
+    "host_permissions": [
+        "https://*/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["popup.js"]
+        }
+    ]
+  }
