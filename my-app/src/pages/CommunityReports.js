@@ -30,7 +30,8 @@ const CommunityReports = () => {
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', height: '100vh', margin: 20 }}>
         <div>
             <h1>Community Reports</h1>
-            <CardList list={reports}/>
+            <CardList list={reports}
+                />
         </div>
     </div>
   );

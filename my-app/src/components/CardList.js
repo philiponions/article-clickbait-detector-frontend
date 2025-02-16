@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, Typography, CardMedia, Grid, Badge, Chip } from '@mui/material';
 
 const data = [
@@ -28,13 +29,20 @@ const data = [
   },
 ];
 
-const CardComponent = ({ title, website, thumbnail, percentage }) => (
+const CardComponent = ({ title, website, thumbnail, percentage, onClick }) => (
     <Card
     sx={{
       minWidth: 350, // Increased minimum width
       width: '100%', // Ensures the card takes up full available width
       marginRight: 100, // Adds some space below each card
+      transition: 'transform 0.2s, box-shadow 0.2s',
+      '&:hover': {
+        transform: 'scale(1.05)',
+        boxShadow: 6,
+        cursor: 'pointer',
+      },
     }}
+    onClick={onClick}
   >
     <CardMedia component="img" height="140" image={thumbnail} alt={title} />
     <CardContent >
@@ -74,6 +82,12 @@ const CardComponent = ({ title, website, thumbnail, percentage }) => (
 );
 
 const CardList = (props) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = (item) => {
+    navigate(`/report/${encodeURIComponent(item.title)}`, { state: { report: item } });
+  };
+
   return (
     <Grid container spacing={2} justifyContent="left">
     {props.list.map((item, index) => (
@@ -82,7 +96,8 @@ const CardList = (props) => {
           title={item.title}
           website={item.website}
           thumbnail={item.thumbnail}
-          percentage={item.meter}          
+          percentage={item.meter}        
+          onClick={() => handleCardClick(item)}  
         />
       </Grid>
     ))}

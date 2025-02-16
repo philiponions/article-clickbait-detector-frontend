@@ -5,6 +5,7 @@ import ClickbaitDetection from './pages/ClickbaitDetection';
 import CommunityReports from './pages/CommunityReports';
 import Navbar from './components/Navbar';
 import About from './pages/About';
+import ReportDetails from './pages/ReportDetails'; // Import the new ReportDetails component
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/clickbait-detection" element={<ClickbaitDetection />} />
         <Route path="/community" element={<CommunityReports/>} />
         <Route path="/about" element={<About/>} />
+        <Route path="/report/:title" element={<ReportDetails />} /> 
       </Routes>
     </BrowserRouter>
   );
