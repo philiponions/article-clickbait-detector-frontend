@@ -60,12 +60,12 @@ const CardComponent = ({ title, website, thumbnail, percentage }) => (
       <Chip style={{marginTop: 10}}
         label={
             percentage > 75 ? "Clickbait" : 
-            percentage >= 50 ? "Mixed" : 
+            percentage >= 25 ? "Mixed" : 
             "Legit"
         } 
         color={
             percentage > 75 ? "error" : 
-            percentage >= 50 ? "warning" : 
+            percentage >= 25 ? "warning" : 
             "success"
         }
     />

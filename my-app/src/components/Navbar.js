@@ -44,6 +44,17 @@ function Navbar() {
             >
                 Community
             </Typography>  
+            <Typography
+                style={{marginLeft: 10}}
+                component="a"
+                href="about"
+                sx={{
+                    textDecoration: 'none',
+                    color: 'inherit',
+                }}
+            >
+                About
+            </Typography>  
           </div>
         </Toolbar>
       </Container>
