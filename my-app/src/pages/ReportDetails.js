@@ -106,45 +106,49 @@ const ReportDetails = () => {
       borderRadius: '8px', // Optional rounded corners for aesthetics
     }}
     >
-      <Typography variant="h4">{report.title}</Typography>
-      <img src={report.thumbnail} alt={report.title} style={{ width: '30%', height: 'auto', marginBottom: 10 }} />
-      <Typography>
-      <a href={report.url} target="_blank" rel="noopener noreferrer">
-        Article Link
-      </a>
+      <Typography variant="h4" style={{marginTop: 15, fontWeight: 'bold', marginBottom: 10}}>{report.title}</Typography>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+
+          <img src={report.thumbnail} alt={report.title} style={{ width: '50%', height: 'auto', marginBottom: 10 }} />
+      <Typography style={{ marginLeft: 20 }}>
       </Typography>
+      </div>
+        <a href={report.url} target="_blank" rel="noopener noreferrer">
+        Article Link
+        </a>
+
 
       <h3>Clickbait Score</h3>
       <div
       style={{
-        width: '100%',
-        height: '20px',
-        backgroundColor: '#ccc',
-        borderRadius: '5px',
-        overflow: 'hidden',
+      width: '100%',
+      height: '20px',
+      backgroundColor: '#ccc',
+      borderRadius: '5px',
+      overflow: 'hidden',
       }}
       >
       <div
-        style={{
-        width: `${report.percentage}%`,
-        height: '100%',
-        backgroundColor: report.percentage > 75 ? 'red' : report.percentage >= 25 ? 'orange' : 'green',
-        }}
+      style={{
+      width: `${report.percentage}%`,
+      height: '100%',
+      backgroundColor: report.percentage > 75 ? 'red' : report.percentage >= 25 ? 'orange' : 'green',
+      }}
       ></div>
       </div>
-      <Typography style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}>
+      <Typography style={{ display: 'flex', alignItems: 'center', marginTop: 10, marginBottom: 10 }}>
       <p style={{ margin: 0 }}><strong>Verdict:</strong></p>
       <Chip
-        style={{ marginLeft: 10 }}
-        label={
-        report.percentage > 75 ? "Clickbait" :
-          report.percentage >= 25 ? "Mixed" :
-          "Legit"
-        }
-        sx={{
-        backgroundColor: report.percentage > 75 ? 'red' : report.percentage >= 25 ? 'orange' : 'green',
-        color: 'white'
-        }}
+      style={{ marginLeft: 10 }}
+      label={
+      report.percentage > 75 ? "Clickbait" :
+      report.percentage >= 25 ? "Mixed" :
+      "Legit"
+      }
+      sx={{
+      backgroundColor: report.percentage > 75 ? 'red' : report.percentage >= 25 ? 'orange' : 'green',
+      color: 'white'
+      }}
       />
       </Typography>      
       <h2>Explanation</h2>
@@ -153,7 +157,7 @@ const ReportDetails = () => {
       <p>{report.tldr}</p>
       <div style={{marginTop: 50}}>             
       <Stack direction="row" spacing={3} alignItems="center" sx={{ marginTop: 2 }}>
-        {/* Like */}
+      {/* Like */}
           <Stack direction="row" spacing={1} alignItems="center">
             <Typography>{likes}</Typography>
             <Button
