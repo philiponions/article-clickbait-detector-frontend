@@ -3,6 +3,7 @@ import { Chip } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { ThumbUp, ThumbDown } from '@mui/icons-material';
 import { Button, Typography, Stack } from '@mui/material';
+import defaultThumbnail from '../components/default.png';
 
 const ReportDetails = () => {
   const { id } = useParams();

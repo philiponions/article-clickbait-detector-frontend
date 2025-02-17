@@ -1,12 +1,11 @@
-// src/pages/Home.js
 import React, { useEffect, useState } from 'react';
 import CardList from '../components/CardList';
-import { Button, Stack } from '@mui/material';
-
+import { Button, Stack, TextField } from '@mui/material';
 
 const CommunityReports = () => {
   const [reports, setReports] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
   const reportsPerPage = 12;
 
   useEffect(() => {
@@ -28,13 +27,15 @@ const CommunityReports = () => {
 
   useEffect(() => {
     console.log(reports);
-
   }, [reports]);
-  
+
   // Calculate the reports to display on the current page
   const indexOfLastReport = currentPage * reportsPerPage;
   const indexOfFirstReport = indexOfLastReport - reportsPerPage;
-  const currentReports = reports.slice(indexOfFirstReport, indexOfLastReport);
+  const filteredReports = reports.filter(report =>
+    report.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  const currentReports = filteredReports.slice(indexOfFirstReport, indexOfLastReport);
 
   // Handle page change
   const handlePageChange = (pageNumber) => {
@@ -42,13 +43,20 @@ const CommunityReports = () => {
   };
 
   // Calculate total pages
-  const totalPages = Math.ceil(reports.length / reportsPerPage);
+  const totalPages = Math.ceil(filteredReports.length / reportsPerPage);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', height: '100vh', margin: 20 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
         <h1>Community Reports</h1>
-        <div id='pagination' style={{ marginBottom: '20px' }}>
+        <div id='pagination' style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+          <TextField
+            label="Search"
+            variant="outlined"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{ marginRight: '20px' }}
+          />
           <Stack direction="row" spacing={2}>
             <Button
               variant={currentPage > 1 ? 'outlined' : 'disabled'}
