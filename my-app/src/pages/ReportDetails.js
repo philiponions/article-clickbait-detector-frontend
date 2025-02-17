@@ -1,4 +1,4 @@
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Chip } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { ThumbUp, ThumbDown } from '@mui/icons-material';

@@ -2,9 +2,39 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const ClickbaitDetection = () => {
-  const [reportData, setReportData] = useState(null);
+  const [reportData, setReportData] = useState({});
   const location = useLocation();
   const { url } = location.state || {};
+
+  
+  const publishReport = () => {
+    const data = {
+      url: url,
+      summary: reportData.summary,
+      percentage: reportData.percentage,
+      explanation: reportData.explanation,
+    };
+
+    fetch('http://localhost:8000/add-report/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message === "Report added") {
+          alert("Report published successfully!");
+        } else {
+          alert("Failed to publish report.");
+        }
+      })
+      .catch((error) => {
+        console.error('Error publishing report:', error);
+        alert("An error occurred while publishing the report.");
+      });
+  };
 
   useEffect(() => {
     if (url) {
@@ -28,13 +58,13 @@ const ClickbaitDetection = () => {
   }
 
   // If reportData is loaded, render the report details
+  console.log(reportData);
   return (
     <div
       style={{
-        padding: '10px',
-        maxWidth: '1200px', // Set max width for the container
-        margin: '0 auto', // Center the container horizontally
-        
+        padding: '20px',
+        maxWidth: '800px', // Set max width for the container
+        margin: '40px auto', // Center the container horizontally and add vertical margin
         borderRadius: '8px', // Optional rounded corners for aesthetics
       }}
     >
@@ -72,6 +102,22 @@ const ClickbaitDetection = () => {
       </div>
       <h3>Explanation</h3>
       <p>{reportData.explanation}</p>
+      <button
+        id="publish-report"
+        onClick={publishReport}
+        style={{
+          display: 'block',
+          margin: '20px auto',
+          padding: '10px 20px',
+          backgroundColor: '#007bff',
+          color: '#fff',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+        }}
+      >
+        Publish Report
+      </button>
     </div>
   );
 };

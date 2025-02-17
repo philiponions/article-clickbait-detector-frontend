@@ -56,6 +56,13 @@ const CommunityReports = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             style={{ marginRight: '20px' }}
+            InputProps={{
+              endAdornment: searchTerm && (
+                <Button onClick={() => setSearchTerm('')} disabled={!searchTerm}>
+                  X
+                </Button>
+              ),
+            }}
           />
           <Stack direction="row" spacing={2}>
             <Button
