@@ -37,12 +37,10 @@ const ClickbaitDetection = () => {
         .catch((error) => console.error('Error fetching report:', error));
     }
   }, [content]);
+  
   useEffect(() => {
-    console.log(reportData);
-    if (reportData) {
-      console.log(reportData.percentage)
-    }
-  }, [reportData]);
+    console.log(content.thumnail_url);
+}, [content])
 
   if (!reportData) {
     return <div>Loading report...</div>;
@@ -60,6 +58,7 @@ const ClickbaitDetection = () => {
       }}
     >
       <Typography variant="h4" style={{marginTop: 15}}>{content.title}</Typography>
+      <img src={content.thumbnail_url} alt={content.thumbnail_url} style={{ width: '50%', height: 'auto', marginBottom: 10 }}/>
       <h1 style={{ textAlign: 'left' }}>Analysis Report</h1>
       {/* <h3>Key Points</h3> */}
       {/* Check if keyPoints exists and is an array before calling map */}
@@ -72,7 +71,10 @@ const ClickbaitDetection = () => {
       ) : (
         <p>No key points available.</p>
       )} */}
-      <h3>Clickbait Score</h3>
+      <div style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}>
+        <h3>Clickbait Score</h3>
+        <p style={{marginLeft: 10}}>{`${reportData.percentage}%`}</p>
+      </div>
       <div
         style={{
           width: '100%',
