@@ -48,7 +48,7 @@ async function sendToApi(content) {
         });
 
         const data = await response.json();
-        data["percentage"] = parseInt(data["percentage"], 10);
+        data["percentage"] = data["percentage"];
         data["thumbnail"] = content.thumbnail;
         data["title"] = content.title;
 
@@ -72,7 +72,7 @@ async function sendToApi(content) {
 
         if (data["existing"]) {
             document.getElementById("view-report").addEventListener("click", () => {
-                window.open("http://localhost:8000/view-report", "_blank");
+                window.open(`http://localhost:3000/reports/${data._id}`, "_blank");
             });
         } else {
             document.getElementById("publish-report").addEventListener("click", async () => {
@@ -83,13 +83,17 @@ async function sendToApi(content) {
                         body: JSON.stringify(data)
                     });
 
+                    const publishData = await publishResponse.json();
+                    const id = publishData._id;
+                    console.log(publishData);
+                                    
                     if (publishResponse.ok) {
                         alert("Report published successfully!");
                         const publishButton = document.getElementById("publish-report");
                         publishButton.id = "view-report";
                         publishButton.textContent = "View Report";
                         publishButton.addEventListener("click", () => {
-                            window.open("http://localhost:8000/view-report", "_blank");
+                            window.open(`http://localhost:3000/reports/${id}`, "_blank");
                         });
                     } else {
                         alert("Failed to publish report.");
