@@ -12,16 +12,17 @@ const ClickbaitDetection = () => {
   
   const publishReport = () => {
     const data = {
-      thumbnail: reportData.thumbnail,
-      title: reportData.title,
+      thumbnail: content.thumbnail_url,
+      title: content.title,
       url: content?.url,
       website: reportData.website,
       percentage: reportData.percentage,
       explanation: reportData.explanation,
       tldr: reportData.tldr,
-      dislikes: reportData.dislikes,
-      likes: reportData.likes,
+      dislikes: 0,
+      likes: 0
     };
+    console.log(data);
 
     fetch('http://localhost:8000/add-report/', {
       method: 'POST',
@@ -31,12 +32,8 @@ const ClickbaitDetection = () => {
       body: JSON.stringify(data),
     })
       .then((response) => response.json())
-      .then((data) => {
-        if (data.message === "Report added") {
-          alert("Report published successfully!");
-        } else {
-          alert("Failed to publish report.");
-        }
+      .then(() => {
+        window.location.href = '/community';
       })
       .catch((error) => {
         console.error('Error publishing report:', error);
