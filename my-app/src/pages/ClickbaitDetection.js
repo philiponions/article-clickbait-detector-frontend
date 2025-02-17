@@ -1,15 +1,12 @@
-import { Chip, Typography } from '@mui/material';
+import { Chip, Typography, Skeleton } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
 
 const ClickbaitDetection = () => {
   const [reportData, setReportData] = useState({});
   const location = useLocation();
   const { content } = location.state || {};
 
-  
   const publishReport = () => {
     const data = {
       thumbnail: content.thumbnail_url,
@@ -27,18 +24,18 @@ const ClickbaitDetection = () => {
     fetch('http://localhost:8000/add-report/', {
       method: 'POST',
       headers: {
-      'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     })
       .then((response) => response.json())
       .then(() => {
-      alert("Report published successfully.");
-      window.location.href = '/community';
+        alert("Report published successfully.");
+        window.location.href = '/community';
       })
       .catch((error) => {
-      console.error('Error publishing report:', error);
-      alert("An error occurred while publishing the report.");
+        console.error('Error publishing report:', error);
+        alert("An error occurred while publishing the report.");
       });
   };
 
@@ -47,7 +44,6 @@ const ClickbaitDetection = () => {
       const sanitizedContent = content.data.replace(/[\n\r\t\s\\]+/g, ' ').trim();
       
       // Fetch the report data based on the URL
-      // Replace with your actual API endpoint
       fetch('http://localhost:8000/generate-report', {
         method: 'POST',
         headers: {
@@ -62,24 +58,44 @@ const ClickbaitDetection = () => {
         .then((response) => response.json())
         .then((data) => {
           if (data._id) {
-        window.location.href = `/reports/${data._id}`;
+            window.location.href = `/reports/${data._id}`;
           } else {
-        setReportData(data);
+            setReportData(data);
           }
         })
         .catch((error) => console.error('Error fetching report:', error));
     }
   }, [content]);
-  
-  useEffect(() => {
-    console.log(content.thumnail_url);
-}, [content])
 
-  if (!reportData) {
-    return <div>Loading report...</div>;
+  useEffect(() => {
+    console.log(content.thumbnail_url); // Fix typo
+  }, [content]);
+
+  // If reportData is not available yet, show skeleton loading
+  if (!reportData || !reportData.percentage) {
+    return (
+      <div
+        style={{
+          padding: '10px',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          marginTop: 15,
+          marginBottom: 15,
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+          borderRadius: '8px',
+          backgroundColor: 'white',
+          color: 'black',
+        }}
+      >
+        <Skeleton variant="text" width="80%" height={50} style={{ marginBottom: '10px' }} />
+        <Skeleton variant="rectangular" width="50%" height={50} style={{ marginBottom: '10px' }} />
+        <Skeleton variant="rectangular" width="100%" height={200} />
+        <Skeleton variant="text" width="100%" height={20} style={{ marginTop: '10px' }} />
+      </div>
+    );
   }
 
-  // If reportData is loaded, render the report details
+  // Render the report details once data is available
   return (
     <div
       style={{
@@ -92,23 +108,18 @@ const ClickbaitDetection = () => {
         borderRadius: '8px', // Optional rounded corners for aesthetics
       }}
     >
-      <Typography variant="h4" style={{marginTop: 15}}>{content.title}</Typography>
-      <img src={content.thumbnail_url} alt={content.thumbnail_url} style={{ width: '50%', height: 'auto', marginBottom: 10 }}/>
+      <Typography variant="h4" style={{ marginTop: 15 }}>
+        {content.title}
+      </Typography>
+      <img
+        src={content.thumbnail_url}
+        alt={content.thumbnail_url}
+        style={{ width: '50%', height: 'auto', marginBottom: 10 }}
+      />
       <h1 style={{ textAlign: 'left' }}>Analysis Report</h1>
-      {/* <h3>Key Points</h3> */}
-      {/* Check if keyPoints exists and is an array before calling map */}
-      {/* {Array.isArray(reportData.keyPoints) && reportData.keyPoints.length > 0 ? (
-        <ul>
-          {reportData.keyPoints.map((point, index) => (
-            <li key={index}>{point}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>No key points available.</p>
-      )} */}
       <div style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}>
         <h3>Clickbait Score</h3>
-        <p style={{marginLeft: 10}}>{`${reportData.percentage}%`}</p>
+        <p style={{ marginLeft: 10 }}>{`${reportData.percentage}%`}</p>
       </div>
       <div
         style={{
@@ -121,27 +132,36 @@ const ClickbaitDetection = () => {
       >
         <div
           style={{
-          width: `${reportData.percentage}%`,
-          height: '100%',
-          backgroundColor: reportData.percentage > 75 ? 'red' : reportData.percentage >= 25 ? 'orange' : 'green',
+            width: `${reportData.percentage}%`,
+            height: '100%',
+            backgroundColor: reportData.percentage > 75 ? 'red' : reportData.percentage >= 25 ? 'orange' : 'green',
           }}
         ></div>
-      </div>        
-        <Typography style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}>
-              <p style={{ margin: 0 }}><strong>Verdict:</strong></p>
-              <Chip
-                style={{ marginLeft: 10 }}
-                label={
-                reportData.percentage > 75 ? "Clickbait" :
-                  reportData.percentage >= 25 ? "Mixed" :
-                  "Legit"
-                }
-                sx={{
-                backgroundColor: reportData.percentage > 75 ? 'red' : reportData.percentage >= 25 ? 'orange' : 'green',
-                color: 'white'
-                }}
-              />
-        </Typography>      
+      </div>
+      <Typography style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}>
+        <p style={{ margin: 0 }}>
+          <strong>Verdict:</strong>
+        </p>
+        <Chip
+          style={{ marginLeft: 10 }}
+          label={
+            reportData.percentage > 75
+              ? 'Clickbait'
+              : reportData.percentage >= 25
+              ? 'Mixed'
+              : 'Legit'
+          }
+          sx={{
+            backgroundColor:
+              reportData.percentage > 75
+                ? 'red'
+                : reportData.percentage >= 25
+                ? 'orange'
+                : 'green',
+            color: 'white',
+          }}
+        />
+      </Typography>
       <h2>Explanation</h2>
       <p>{reportData.explanation}</p>
       <h3>TLDR;</h3>
