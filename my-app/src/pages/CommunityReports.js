@@ -1,6 +1,8 @@
+// src/pages/Home.js
 import React, { useEffect, useState } from 'react';
 import CardList from '../components/CardList';
 import { Button, Stack, TextField } from '@mui/material';
+
 
 const CommunityReports = () => {
   const [reports, setReports] = useState([]);
@@ -27,15 +29,13 @@ const CommunityReports = () => {
 
   useEffect(() => {
     console.log(reports);
-  }, [reports]);
 
+  }, [reports]);
+  
   // Calculate the reports to display on the current page
   const indexOfLastReport = currentPage * reportsPerPage;
   const indexOfFirstReport = indexOfLastReport - reportsPerPage;
-  const filteredReports = reports.filter(report =>
-    report.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  const currentReports = filteredReports.slice(indexOfFirstReport, indexOfLastReport);
+  const currentReports = reports.slice(indexOfFirstReport, indexOfLastReport);
 
   // Handle page change
   const handlePageChange = (pageNumber) => {
@@ -43,11 +43,12 @@ const CommunityReports = () => {
   };
 
   // Calculate total pages
-  const totalPages = Math.ceil(filteredReports.length / reportsPerPage);
+  const totalPages = Math.ceil(reports.length / reportsPerPage);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', height: '100vh', margin: 20 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
+<<<<<<< HEAD
         <h1>Community Reports</h1>
         <div id='pagination' style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
           <TextField
@@ -81,6 +82,38 @@ const CommunityReports = () => {
               {'>'}
             </Button>
           </Stack>
+=======
+        <div id='pagination' style={{ display: "flex", justifyContent: "space-between", marginBottom: '20px', padding: '20px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px', backgroundColor: 'white', width: "100%"}}>
+          <h1 style={{ color: 'black' }}>Community Reports</h1>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <TextField
+                label="Search"
+                variant="outlined"
+                style={{marginRight: 10}}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                InputProps={{ style: { color: 'black' } }}
+                InputLabelProps={{ style: { color: 'black' } }}
+              />
+              <Stack direction="row" spacing={2} >
+                <Button
+                  variant={currentPage > 1 ? 'outlined' : 'disabled'}
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  {'<'}
+                </Button>
+                <Button variant="contained">{currentPage}</Button>
+                <Button
+                  variant={currentPage < totalPages ? 'outlined' : 'disabled'}
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  {'>'}
+                </Button>
+              </Stack>
+          </div>
+>>>>>>> b7bbe1496b9c7fa4cd29dfcebbe53d27fc14ea0e
         </div>
       </div>
       <CardList list={currentReports} />
