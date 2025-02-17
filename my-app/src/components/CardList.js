@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, Typography, CardMedia, Grid, Badge, Chip } from '@mui/material';
-
+import defaultThumbnail from './default.jpg';
 const data = [
   {
     title: 'GTA 6 gameplay leaks: Explorable buildings, destructibility, and more coming in fall 2025',
@@ -41,20 +41,25 @@ const CardComponent = ({ title, website, thumbnail, percentage, onClick }) => (
         boxShadow: 6,
         cursor: 'pointer',
       },
-    }}
-    onClick={onClick}
-  >
-    <CardMedia component="img" height="140" image={thumbnail} alt={title} />
-    <CardContent >
-        <Typography
-            gutterBottom
-            variant="h5"
-            component="div"
-            sx={{
-            whiteSpace: 'nowrap',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            width: '100%', // Ensure the typography takes up full width of the container
+        }}
+        onClick={onClick}
+      >
+        <CardMedia
+      component="img"
+      height="140"
+      image={thumbnail && thumbnail.startsWith('http') ? thumbnail : defaultThumbnail}
+      alt={title}
+        />
+        <CardContent>
+      <Typography
+        gutterBottom
+        variant="h5"
+        component="div"
+        sx={{
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          width: '100%', // Ensure the typography takes up full width of the container
             }}
         >
         {title}
@@ -83,8 +88,10 @@ const CardComponent = ({ title, website, thumbnail, percentage, onClick }) => (
 
 const CardList = (props) => {
   const navigate = useNavigate();
+  console.log("Thumbnail URL:", defaultThumbnail); // Log the thumbnail URL
 
   const handleCardClick = (item) => {
+    
     console.log("passing id:", item._id);
     navigate(`/reports/${item._id}`);
   };
