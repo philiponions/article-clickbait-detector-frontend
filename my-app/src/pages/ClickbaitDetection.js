@@ -53,7 +53,9 @@ const ClickbaitDetection = () => {
         padding: '10px',
         maxWidth: '1200px', // Set max width for the container
         margin: '0 auto', // Center the container horizontally
-        
+        marginTop: 15,
+        marginBottom: 15,
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px', backgroundColor: 'white', color: "black", 
         borderRadius: '8px', // Optional rounded corners for aesthetics
       }}
     >

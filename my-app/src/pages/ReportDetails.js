@@ -103,10 +103,15 @@ const ReportDetails = () => {
       padding: '10px',
       maxWidth: '1200px', // Set max width for the container
       margin: '0 auto', // Center the container horizontally
+      marginTop: 15,
+      marginBottom: 15,
       borderRadius: '8px', // Optional rounded corners for aesthetics
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px', backgroundColor: 'white',
+      color: "black",
+      padding: 20
     }}
     >
-      <Typography variant="h4" style={{marginTop: 15, fontWeight: 'bold', marginBottom: 10}}>{report.title}</Typography>
+      <Typography variant="h4" style={{marginTop: 10, fontWeight: 'bold', marginBottom: 10}}>{report.title}</Typography>
       <div style={{ display: 'flex', alignItems: 'center' }}>
 
           <img src={report.thumbnail} alt={report.title} style={{ width: '50%', height: 'auto', marginBottom: 10 }} />
