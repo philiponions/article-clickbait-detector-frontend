@@ -13,14 +13,12 @@ const Home = () => {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
-      const response = await fetch('http://localhost:8080/api/link', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ link: url }),
+      const response = await fetch(`http://localhost:8000/scrape-data?url=${encodeURIComponent(url)}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       });
 
       if (!response.ok) {
