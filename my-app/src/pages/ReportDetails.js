@@ -3,6 +3,7 @@ import { Chip } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { ThumbUp, ThumbDown } from '@mui/icons-material';
 import { Button, Typography, Stack } from '@mui/material';
+import defaultThumbnail from '../components/default.png';
 
 const ReportDetails = () => {
     const { id } = useParams();
@@ -39,7 +40,7 @@ const ReportDetails = () => {
         }}
         >
             <Typography variant="h4">{report.title}</Typography>
-            <img src={report.thumbnail} alt={report.title} style={{ width: '30%', height: 'auto', marginBottom: 10 }} />
+            <img src={report.thumbnail && report.thumbnail.startsWith('http') ? report.thumbnail : defaultThumbnail} alt={report.title} style={{ width: '30%', height: 'auto', marginBottom: 10 }} />
             <Typography>
                 <a href={report.url} target="_blank" rel="noopener noreferrer">
                     Article Link

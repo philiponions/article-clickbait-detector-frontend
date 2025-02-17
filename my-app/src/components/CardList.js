@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, Typography, CardMedia, Grid, Badge, Chip } from '@mui/material';
-import defaultThumbnail from './default.jpg';
+import defaultThumbnail from './default.png';
+import Tooltip from '@mui/material/Tooltip';
 const data = [
   {
     title: 'GTA 6 gameplay leaks: Explorable buildings, destructibility, and more coming in fall 2025',
@@ -30,7 +31,7 @@ const data = [
 ];
 
 const CardComponent = ({ title, website, thumbnail, percentage, onClick }) => (
-    <Card
+  <Card
     sx={{
       minWidth: 350, // Increased minimum width
       width: '100%', // Ensures the card takes up full available width
@@ -41,47 +42,50 @@ const CardComponent = ({ title, website, thumbnail, percentage, onClick }) => (
         boxShadow: 6,
         cursor: 'pointer',
       },
-        }}
-        onClick={onClick}
-      >
-        <CardMedia
+    }}
+    onClick={onClick}
+  >
+    <CardMedia
       component="img"
       height="140"
       image={thumbnail && thumbnail.startsWith('http') ? thumbnail : defaultThumbnail}
       alt={title}
-        />
-        <CardContent>
-      <Typography
-        gutterBottom
-        variant="h5"
-        component="div"
-        sx={{
-          whiteSpace: 'nowrap',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          width: '100%', // Ensure the typography takes up full width of the container
-            }}
+    />
+    <CardContent>
+      <Tooltip title={title}>
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          sx={{
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            width: '100%', // Ensure the typography takes up full width of the container
+          }}
         >
-        {title}
-      </Typography>
+          {title}
+        </Typography>
+      </Tooltip>
       <Typography variant="body2" color="text.secondary">
         website: {website}
       </Typography>
       <Typography variant="body1" color="primary">
         {percentage}%
       </Typography>
-      <Chip style={{marginTop: 10}}
+      <Chip
+        style={{ marginTop: 10 }}
         label={
-            percentage > 75 ? "Clickbait" : 
-            percentage >= 25 ? "Mixed" : 
-            "Legit"
-        } 
-        color={
-            percentage > 75 ? "error" : 
-            percentage >= 25 ? "warning" : 
-            "success"
+          percentage > 75 ? "Clickbait" :
+          percentage >= 25 ? "Mixed" :
+          "Legit"
         }
-    />
+        color={
+          percentage > 75 ? "error" :
+          percentage >= 25 ? "warning" :
+          "success"
+        }
+      />
     </CardContent>
   </Card>
 );
