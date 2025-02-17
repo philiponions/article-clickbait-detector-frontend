@@ -27,17 +27,18 @@ const ClickbaitDetection = () => {
     fetch('http://localhost:8000/add-report/', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+      'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     })
       .then((response) => response.json())
       .then(() => {
-        window.location.href = '/community';
+      alert("Report published successfully.");
+      window.location.href = '/community';
       })
       .catch((error) => {
-        console.error('Error publishing report:', error);
-        alert("An error occurred while publishing the report.");
+      console.error('Error publishing report:', error);
+      alert("An error occurred while publishing the report.");
       });
   };
 
