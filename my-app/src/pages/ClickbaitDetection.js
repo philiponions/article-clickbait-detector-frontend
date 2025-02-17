@@ -12,10 +12,15 @@ const ClickbaitDetection = () => {
   
   const publishReport = () => {
     const data = {
-      url: url,
-      summary: reportData.summary,
+      thumbnail: reportData.thumbnail,
+      title: reportData.title,
+      url: content?.url,
+      website: reportData.website,
       percentage: reportData.percentage,
       explanation: reportData.explanation,
+      tldr: reportData.tldr,
+      dislikes: reportData.dislikes,
+      likes: reportData.likes,
     };
 
     fetch('http://localhost:8000/add-report/', {
@@ -67,6 +72,7 @@ const ClickbaitDetection = () => {
         .catch((error) => console.error('Error fetching report:', error));
     }
   }, [content]);
+
   useEffect(() => {
     console.log(reportData);
     if (reportData) {
@@ -79,7 +85,6 @@ const ClickbaitDetection = () => {
   }
 
   // If reportData is loaded, render the report details
-  console.log(reportData);
   return (
     <div
       style={{
@@ -89,7 +94,7 @@ const ClickbaitDetection = () => {
         borderRadius: '8px', // Optional rounded corners for aesthetics
       }}
     >
-      <Typography variant="h4" style={{marginTop: 15}}>{content.title}</Typography>
+      <Typography variant="h4" style={{marginTop: 15}}>{content?.title}</Typography>
       <h1 style={{ textAlign: 'left' }}>Analysis Report</h1>
       {/* <h3>Key Points</h3> */}
       {/* Check if keyPoints exists and is an array before calling map */}
@@ -137,6 +142,8 @@ const ClickbaitDetection = () => {
         </Typography>      
       <h2>Explanation</h2>
       <p>{reportData.explanation}</p>
+      <h3>TLDR;</h3>
+      <p>{reportData.tldr}</p>
       <button
         id="publish-report"
         onClick={publishReport}
@@ -153,8 +160,6 @@ const ClickbaitDetection = () => {
       >
         Publish Report
       </button>
-      <h3>TLDR;</h3>
-      <p>{reportData.tldr}</p>
     </div>
   );
 };
