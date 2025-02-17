@@ -48,41 +48,6 @@ const CommunityReports = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', height: '100vh', margin: 20 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
-<<<<<<< HEAD
-        <h1>Community Reports</h1>
-        <div id='pagination' style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-          <TextField
-            label="Search"
-            variant="outlined"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            style={{ marginRight: '20px' }}
-            InputProps={{
-              endAdornment: searchTerm && (
-                <Button onClick={() => setSearchTerm('')} disabled={!searchTerm}>
-                  X
-                </Button>
-              ),
-            }}
-          />
-          <Stack direction="row" spacing={2}>
-            <Button
-              variant={currentPage > 1 ? 'outlined' : 'disabled'}
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              {'<'}
-            </Button>
-            <Button variant="contained">{currentPage}</Button>
-            <Button
-              variant={currentPage < totalPages ? 'outlined' : 'disabled'}
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            >
-              {'>'}
-            </Button>
-          </Stack>
-=======
         <div id='pagination' style={{ display: "flex", justifyContent: "space-between", marginBottom: '20px', padding: '20px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px', backgroundColor: 'white', width: "100%"}}>
           <h1 style={{ color: 'black' }}>Community Reports</h1>
           <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -113,7 +78,6 @@ const CommunityReports = () => {
                 </Button>
               </Stack>
           </div>
->>>>>>> b7bbe1496b9c7fa4cd29dfcebbe53d27fc14ea0e
         </div>
       </div>
       <CardList list={currentReports} />
